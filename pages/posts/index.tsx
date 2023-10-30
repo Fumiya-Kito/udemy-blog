@@ -1,31 +1,18 @@
 import AllPosts from "@/components/posts/all-posts";
+import { getAllPosts } from "@/lib/posts-util";
+import { Post } from "@/types";
 
-function AllPostsPage() {
-  const DUMMY_POSTS = [
-    {
-      slug: "getting-started1",
-      title: "getting-started1",
-      image: "vercel.svg",
-      excerpt: "NextJS is a the React framework for production",
-      date: "2022-02-01",
-    },
-    {
-      slug: "getting-started2",
-      title: "getting-started2",
-      image: "vercel.svg",
-      excerpt: "NextJS is a the React framework for production",
-      date: "2022-02-01",
-    },
-    {
-      slug: "getting-started3",
-      title: "getting-started3",
-      image: "vercel.svg",
-      excerpt: "NextJS is a the React framework for production",
-      date: "2022-02-01",
-    },
-  ];
+function AllPostsPage(props: { posts: Post[]}) {
+  return <AllPosts posts={props.posts}/>
+}
 
-  return <AllPosts posts={DUMMY_POSTS}/>
+export function getStaticProps() {
+  const allPosts = getAllPosts(); 
+  return {
+    props: {
+      posts: allPosts,
+    }
+  }
 }
 
 export default AllPostsPage;

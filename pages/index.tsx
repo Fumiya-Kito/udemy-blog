@@ -1,32 +1,10 @@
 import Head from "next/head";
 import Hero from "@/components/home-page/hero";
 import FeaturedPosts from "@/components/home-page/featured-posts";
+import { getFeaturedPosts } from "@/lib/posts-util";
+import { Post } from '@/types'
 
-export default function Home() {
-  const DUMMY_POSTS = [
-    {
-      slug: "getting-started1",
-      title: "getting-started1",
-      image: "vercel.svg",
-      excerpt: "NextJS is a the React framework for production",
-      date: "2022-02-01",
-    },
-    {
-      slug: "getting-started2",
-      title: "getting-started2",
-      image: "vercel.svg",
-      excerpt: "NextJS is a the React framework for production",
-      date: "2022-02-01",
-    },
-    {
-      slug: "getting-started3",
-      title: "getting-started3",
-      image: "vercel.svg",
-      excerpt: "NextJS is a the React framework for production",
-      date: "2022-02-01",
-    },
-  ];
-
+export default function Home(props: { posts: Post[]}) {
   return (
     <>
       <Head>
@@ -36,7 +14,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
-      <FeaturedPosts posts={DUMMY_POSTS} />
+      <FeaturedPosts posts={props.posts} />
     </>
   );
+}
+
+export function getStaticProps() {
+  const featuredPosts = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredPosts
+    },
+  }
 }

@@ -1,11 +1,7 @@
 import { Post } from '@/types';
 import PostItem from './post-item';
 
-interface PostsGridProps {
-  posts: Post[],
-}
-
-function PostsGrid(props: PostsGridProps) {
+function PostsGrid(props: {posts: Post[]}) {
   const { posts } = props;
 
   return <ul>
